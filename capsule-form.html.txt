@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Capsule - Peace for You Network</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .form-header {
+            text-align: center;
+            padding: 120px 20px 40px;
+            background: linear-gradient(135deg, #0B1A2F, #1a3a5a);
+        }
+        .form-title {
+            font-size: 2.5rem;
+            color: #FDB813;
+            margin-bottom: 1rem;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(253,184,19,0.2);
+            border-radius: 20px;
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        .form-label {
+            display: block;
+            color: #FDB813;
+            margin-bottom: 8px;
+        }
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(253,184,19,0.3);
+            border-radius: 10px;
+            color: white;
+        }
+        .form-textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        .form-submit {
+            background: #FDB813;
+            color: #0B1A2F;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #FDB813;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-text">🕊️ Peace for You Network</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="sky.html">SKY</a></li>
+                <li><a href="book.html">BOOK</a></li>
+                <li><a href="peace-map.html">PEACE MAP</a></li>
+                <li><a href="our-story.html">OUR STORY</a></li>
+                <li><a href="#" class="access-btn">🔑 GET ACCESS</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="form-header">
+        <a href="index.html" class="back-link">← Back to Home</a>
+        <h1 class="form-title">⭐ Seal a Time Capsule</h1>
+        <p style="color: rgba(255,255,255,0.8);">Your message, encrypted, for the future.</p>
+    </header>
+
+    <main class="form-container">
+        <form id="capsuleForm" onsubmit="event.preventDefault(); alert('✨ Thank you! Your time capsule has been sealed.'); this.reset();">
+            <div class="form-group">
+                <label class="form-label">Your Name *</label>
+                <input type="text" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Email *</label>
+                <input type="email" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Your Message *</label>
+                <textarea class="form-textarea" required placeholder="Write a message for the future..."></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Open Date *</label>
+                <input type="date" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Open Condition</label>
+                <select class="form-select">
+                    <option>On exact date</option>
+                    <option>When I reach age</option>
+                    <option>Random</option>
+                </select>
+            </div>
+            <button type="submit" class="form-submit">⭐ Seal Capsule</button>
+        </form>
+    </main>
+
+    <div class="ai-guide" id="aiGuide">
+        <div class="guide-icon">🕊️</div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">🕊️ Peace for You Network · © 2026</div>
+                <div class="footer-social">
+                    <span>FOLLOW US:</span>
+                    <a href="https://t.me/bookforpeace">📱 Telegram: @bookforpeace</a>
+                    <a href="https://tiktok.com/@peaceforyounetwork">🎵 TikTok: @peaceforyounetwork</a>
+                </div>
+                <div class="footer-links">
+                    <a href="privacy.html">Privacy</a> | <a href="terms.html">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="sky.js"></script>
+    <script>
+        document.getElementById('aiGuide').onclick = () => alert('🕊️ AI Peace Guide\n\nHow can I help you?');
+    </script>
+</body>
+</html>

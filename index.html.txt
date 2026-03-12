@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peace for You Network</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-text">🕊️ Peace for You Network</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">HOME</a></li>
+                <li><a href="sky.html">SKY</a></li>
+                <li><a href="book.html">BOOK</a></li>
+                <li><a href="peace-map.html">PEACE MAP</a></li>
+                <li><a href="our-story.html">OUR STORY</a></li>
+                <li><a href="#" class="access-btn">🔑 GET ACCESS</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-sky" id="heroSky"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">We do not wait for peace.<br><span class="gold-text">We make it.</span></h1>
+        </div>
+    </section>
+
+    <!-- Sky Preview -->
+    <section class="sky-preview">
+        <div class="container">
+            <div class="section-header">
+                <h2>☁️ The Sky Canvas</h2>
+                <a href="sky.html" class="view-all">View Full Sky →</a>
+            </div>
+            <div class="sky-mini" id="skyMini"></div>
+        </div>
+    </section>
+
+    <!-- 5 Form Cards -->
+    <section class="cards-section">
+        <div class="container">
+            <h2 class="section-title">✨ Share Your Peace</h2>
+            <div class="cards-grid">
+                <!-- Row 1 (2 cards) -->
+                <div class="card-row row-1">
+                    <div class="card personal-card" onclick="window.location.href='personal-form.html'">
+                        <div class="card-icon">👤</div>
+                        <h3 class="card-title">PERSONAL</h3>
+                        <p class="card-desc">Share your peace word</p>
+                    </div>
+                    <div class="card couple-card" onclick="window.location.href='couple-form.html'">
+                        <div class="card-icon">💑</div>
+                        <h3 class="card-title">COUPLE</h3>
+                        <p class="card-desc">Share your love</p>
+                    </div>
+                </div>
+                
+                <!-- Row 2 (3 cards) -->
+                <div class="card-row row-2">
+                    <div class="card family-card" onclick="window.location.href='family-form.html'">
+                        <div class="card-icon">👨‍👩‍👧‍👦</div>
+                        <h3 class="card-title">FAMILY</h3>
+                        <p class="card-desc">Share family peace</p>
+                    </div>
+                    <div class="card group-card" onclick="window.location.href='group-form.html'">
+                        <div class="card-icon">👥</div>
+                        <h3 class="card-title">GROUP</h3>
+                        <p class="card-desc">Share group peace</p>
+                    </div>
+                    <div class="card capsule-card" onclick="window.location.href='capsule-form.html'">
+                        <div class="card-icon">⭐</div>
+                        <h3 class="card-title">TIME CAPSULE</h3>
+                        <p class="card-desc">Seal a message for the future</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Lights -->
+    <section class="recent-lights">
+        <div class="container">
+            <div class="section-header">
+                <h2>📖 Recent Lights</h2>
+                <a href="book.html" class="view-all">View All →</a>
+            </div>
+            <div class="lights-grid" id="recentLights">
+                <div class="light-card">
+                    <div class="light-card-header">
+                        <span class="light-name">Maria</span>
+                        <span class="light-country">Ethiopia</span>
+                    </div>
+                    <div class="light-word">"Love"</div>
+                </div>
+                <div class="light-card">
+                    <div class="light-card-header">
+                        <span class="light-name">John</span>
+                        <span class="light-country">Kenya</span>
+                    </div>
+                    <div class="light-word">"Hope"</div>
+                </div>
+                <div class="light-card">
+                    <div class="light-card-header">
+                        <span class="light-name">David & Sarah</span>
+                        <span class="light-country">Ghana</span>
+                    </div>
+                    <div class="light-word">"Together"</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Gift Icon (Home Only) -->
+    <div class="floating-gift" id="floatingGift" onclick="downloadWallpaper()">
+        <div class="gift-icon">🎁</div>
+        <div class="gift-tooltip">Welcome Wallpaper</div>
+    </div>
+
+    <!-- AI Peace Guide -->
+    <div class="ai-guide" id="aiGuide">
+        <div class="guide-icon">🕊️</div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">🕊️ Peace for You Network · © 2026</div>
+                <div class="footer-social">
+                    <span>FOLLOW US:</span>
+                    <a href="https://t.me/bookforpeace" target="_blank">📱 Telegram: @bookforpeace</a>
+                    <a href="https://tiktok.com/@peaceforyounetwork" target="_blank">🎵 TikTok: @peaceforyounetwork</a>
+                </div>
+                <div class="footer-links">
+                    <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="sky.js"></script>
+    <script>
+        // AI Guide functionality
+        document.getElementById('aiGuide').addEventListener('click', function() {
+            alert('🕊️ AI Peace Guide\n\nHow can I help you find peace today?\n\n"Peace begins with you."');
+        });
+        
+        // Gift wallpaper download
+        function downloadWallpaper() {
+            alert('🎁 Welcome wallpaper download coming soon!');
+        }
+    </script>
+</body>
+</html>
