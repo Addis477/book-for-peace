@@ -176,8 +176,32 @@
 
     <script src="sky.js"></script>
     <script>
-        // AI Guide
-        document.getElementById('aiGuide').onclick = () => alert('🕊️ AI Peace Guide\n\nHow can I help you?');
+        // AI Peace Guide with Hugging Face
+        document.getElementById('aiGuide').onclick = async () => {
+            const question = prompt('🕊️ Ask the Peace Guide (or press OK for a blessing):', 'give me peace');
+            if (question === null) return;
+            
+            try {
+                const response = await fetch('https://peaceai.bookforpeace.workers.dev', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        question: question,
+                        language: 'en'
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('🕊️ Peace Guide says:\n\n"' + result.response + '"');
+                } else {
+                    alert('🕊️ Peace be with you.');
+                }
+            } catch (error) {
+                alert('🕊️ Peace begins with you.');
+            }
+        };
 
         // Form submission with database
         document.getElementById('groupForm').addEventListener('submit', async function(e) {
