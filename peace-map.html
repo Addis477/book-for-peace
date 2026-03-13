@@ -3,79 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book of Lights - Peace for You Network</title>
+    <title>Peace Map - Peace for You Network</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .book-header {
+        .map-header {
             text-align: center;
             padding: 120px 20px 40px;
             background: linear-gradient(135deg, #0B1A2F, #1a3a5a);
         }
-        .book-title {
+        .map-title {
             font-size: 3rem;
             color: #FDB813;
-            margin-bottom: 1rem;
         }
-        .search-section {
-            padding: 30px 20px;
-            background: #0F1E33;
-        }
-        .search-container {
-            max-width: 600px;
-            margin: 0 auto;
+        .map-stats {
             display: flex;
-            gap: 10px;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 20px;
         }
-        .search-input {
-            flex: 1;
-            padding: 15px;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(253,184,19,0.3);
-            border-radius: 40px;
-            color: white;
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(253,184,19,0.2);
+            border-radius: 20px;
+            padding: 25px 40px;
+            text-align: center;
         }
-        .search-btn {
-            background: #FDB813;
-            color: #0B1A2F;
-            border: none;
-            padding: 0 30px;
-            border-radius: 40px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        .lights-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-        .lights-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        .light-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(253,184,19,0.1);
-            border-radius: 15px;
-            padding: 1.5rem;
-        }
-        .light-name {
+        .stat-number {
+            font-size: 2.5rem;
             color: #FDB813;
-            font-weight: 600;
         }
-        .light-country {
-            color: rgba(255,255,255,0.6);
-            float: right;
+        .world-map {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #0F1E33;
+            border-radius: 20px;
         }
-        .light-word {
-            font-size: 1.5rem;
-            margin: 15px 0;
-            color: white;
-            font-style: italic;
+        .country-list {
+            max-width: 600px;
+            margin: 40px auto;
+        }
+        .country-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid rgba(253,184,19,0.1);
         }
     </style>
 </head>
 <body>
+    <!-- Same navigation as other pages -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
@@ -84,74 +61,45 @@
             <ul class="nav-menu">
                 <li><a href="index.html">HOME</a></li>
                 <li><a href="sky.html">SKY</a></li>
-                <li><a href="book.html" class="active">BOOK</a></li>
-                <li><a href="peace-map.html">PEACE MAP</a></li>
+                <li><a href="book.html">BOOK</a></li>
+                <li><a href="peace-map.html" class="active">PEACE MAP</a></li>
                 <li><a href="our-story.html">OUR STORY</a></li>
                 <li><a href="#" class="access-btn">🔑 GET ACCESS</a></li>
             </ul>
         </div>
     </nav>
 
-    <header class="book-header">
-        <h1 class="book-title">📖 Book of Lights</h1>
-        <p>Every voice matters. Every word becomes light.</p>
+    <header class="map-header">
+        <h1 class="map-title">🗺️ Peace Map</h1>
+        <p>Watch peace spread across the world.</p>
     </header>
 
-    <section class="search-section">
-        <div class="search-container">
-            <input type="text" class="search-input" placeholder="Search by name, word, or country...">
-            <button class="search-btn" onclick="alert('Search coming soon!')">Search</button>
+    <div class="map-stats">
+        <div class="stat-card">
+            <div class="stat-number">24</div>
+            <div>Countries</div>
         </div>
-    </section>
-
-    <main class="lights-container">
-        <div class="lights-grid">
-            <div class="light-card">
-                <span class="light-name">Maria</span>
-                <span class="light-country">Ethiopia</span>
-                <div class="light-word">"Love"</div>
-            </div>
-            <div class="light-card">
-                <span class="light-name">John</span>
-                <span class="light-country">Kenya</span>
-                <div class="light-word">"Hope"</div>
-            </div>
-            <div class="light-card">
-                <span class="light-name">David & Sarah</span>
-                <span class="light-country">Ghana</span>
-                <div class="light-word">"Together"</div>
-            </div>
-            <div class="light-card">
-                <span class="light-name">Abebe Family</span>
-                <span class="light-country">Ethiopia</span>
-                <div class="light-word">"Unity"</div>
-            </div>
+        <div class="stat-card">
+            <div class="stat-number">1,024</div>
+            <div>Voices</div>
         </div>
-    </main>
-
-    <div class="ai-guide" id="aiGuide">
-        <div class="guide-icon">🕊️</div>
     </div>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">🕊️ Peace for You Network · © 2026</div>
-                <div class="footer-social">
-                    <span>FOLLOW US:</span>
-                    <a href="https://t.me/bookforpeace">📱 Telegram: @bookforpeace</a>
-                    <a href="https://tiktok.com/@peaceforyounetwork">🎵 TikTok: @peaceforyounetwork</a>
-                </div>
-                <div class="footer-links">
-                    <a href="privacy.html">Privacy</a> | <a href="terms.html">Terms</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <div class="world-map">
+        <svg viewBox="0 0 1000 500" style="width:100%; height:auto;">
+            <circle cx="420" cy="280" r="8" fill="#FDB813" opacity="0.8"/>
+            <circle cx="470" cy="250" r="6" fill="#FDB813" opacity="0.8"/>
+            <circle cx="380" cy="310" r="7" fill="#FDB813" opacity="0.8"/>
+            <circle cx="620" cy="200" r="9" fill="#FDB813" opacity="0.8"/>
+        </svg>
+    </div>
 
-    <script src="sky.js"></script>
-    <script>
-        document.getElementById('aiGuide').onclick = () => alert('🕊️ AI Peace Guide\n\nHow can I help you?');
-    </script>
+    <div class="country-list">
+        <div class="country-item"><span>🇪🇹 Ethiopia</span><span>234</span></div>
+        <div class="country-item"><span>🇰🇪 Kenya</span><span>156</span></div>
+        <div class="country-item"><span>🇳🇬 Nigeria</span><span>189</span></div>
+    </div>
+
+    <!-- AI Guide and Footer same as other pages -->
 </body>
 </html>
