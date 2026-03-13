@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Couple Peace - Peace for You Network</title>
+    <title>Time Capsule - Peace for You Network</title>
     <link rel="stylesheet" href="style.css">
     <style>
         .form-header {
@@ -41,7 +41,7 @@
             color: white;
         }
         .form-textarea {
-            height: 100px;
+            height: 120px;
             resize: vertical;
         }
         .form-input:focus, .form-select:focus, .form-textarea:focus {
@@ -116,65 +116,39 @@
 
     <header class="form-header">
         <a href="index.html" class="back-link">← Back to Home</a>
-        <h1 class="form-title">💑 Share Your Couple Peace</h1>
-        <p style="color: rgba(255,255,255,0.8);">Your love together becomes light.</p>
+        <h1 class="form-title">⭐ Seal a Time Capsule</h1>
+        <p style="color: rgba(255,255,255,0.8);">Your message, encrypted, for the future.</p>
     </header>
 
     <main class="form-container">
         <div id="message" class="message"></div>
         
-        <form id="coupleForm">
+        <form id="capsuleForm">
             <div class="form-group">
-                <label class="form-label">Person 1 Name *</label>
-                <input type="text" class="form-input" id="person1Name" required placeholder="First person's name">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Person 1 Gender *</label>
-                <select class="form-select" id="person1Gender" required>
-                    <option value="">Select</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Person 2 Name *</label>
-                <input type="text" class="form-input" id="person2Name" required placeholder="Second person's name">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Person 2 Gender *</label>
-                <select class="form-select" id="person2Gender" required>
-                    <option value="">Select</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label class="form-label">City *</label>
-                <input type="text" class="form-input" id="city" required placeholder="Your city">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Country *</label>
-                <select class="form-select" id="country" required>
-                    <option value="">Select</option>
-                    <option value="Ethiopia">Ethiopia</option>
-                    <option value="Kenya">Kenya</option>
-                    <option value="Nigeria">Nigeria</option>
-                    <option value="Other">Other</option>
-                </select>
+                <label class="form-label">Your Name *</label>
+                <input type="text" class="form-input" id="name" required placeholder="Your name">
             </div>
             <div class="form-group">
                 <label class="form-label">Email *</label>
                 <input type="email" class="form-input" id="email" required placeholder="your@email.com">
             </div>
             <div class="form-group">
-                <label class="form-label">Your Word Together *</label>
-                <input type="text" class="form-input" id="word" required placeholder="e.g., Together, Forever">
+                <label class="form-label">Your Message *</label>
+                <textarea class="form-textarea" id="message" required placeholder="Write a message for the future..."></textarea>
             </div>
             <div class="form-group">
-                <label class="form-label">Love Story</label>
-                <textarea class="form-textarea" id="loveStory" placeholder="Share your story (optional)"></textarea>
+                <label class="form-label">Open Date *</label>
+                <input type="date" class="form-input" id="openDate" required>
             </div>
-            <button type="submit" class="form-submit" id="submitBtn">✨ Share Your Peace</button>
+            <div class="form-group">
+                <label class="form-label">Open Condition</label>
+                <select class="form-select" id="openCondition">
+                    <option value="exact">On exact date</option>
+                    <option value="age">When I reach age</option>
+                    <option value="random">Random</option>
+                </select>
+            </div>
+            <button type="submit" class="form-submit" id="submitBtn">⭐ Seal Capsule</button>
         </form>
     </main>
 
@@ -204,29 +178,24 @@
         document.getElementById('aiGuide').onclick = () => alert('🕊️ AI Peace Guide\n\nHow can I help you?');
 
         // Form submission with database
-        document.getElementById('coupleForm').addEventListener('submit', async function(e) {
+        document.getElementById('capsuleForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const submitBtn = document.getElementById('submitBtn');
             const originalText = submitBtn.textContent;
             const messageDiv = document.getElementById('message');
             
-            submitBtn.textContent = 'Sharing...';
+            submitBtn.textContent = 'Sealing...';
             submitBtn.disabled = true;
             messageDiv.style.display = 'none';
             
             const formData = {
-                type: 'couple',
-                person1_name: document.getElementById('person1Name').value,
-                person1_gender: document.getElementById('person1Gender').value,
-                person2_name: document.getElementById('person2Name').value,
-                person2_gender: document.getElementById('person2Gender').value,
-                city: document.getElementById('city').value,
-                country: document.getElementById('country').value,
+                type: 'capsule',
+                name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
-                word: document.getElementById('word').value,
-                love_story: document.getElementById('loveStory').value || '',
-                privacy: 'public'
+                message: document.getElementById('message').value,
+                open_date: document.getElementById('openDate').value,
+                open_condition: document.getElementById('openCondition').value
             };
 
             try {
@@ -240,11 +209,11 @@
                 
                 if (result.success) {
                     messageDiv.className = 'message success';
-                    messageDiv.textContent = '✅ Your couple peace has been saved! Redirecting...';
+                    messageDiv.textContent = '✅ Your time capsule has been sealed! Redirecting...';
                     messageDiv.style.display = 'block';
                     
                     setTimeout(() => {
-                        window.location.href = 'book.html';
+                        window.location.href = 'index.html';
                     }, 2000);
                 } else {
                     messageDiv.className = 'message error';
