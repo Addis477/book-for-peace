@@ -55,11 +55,22 @@
             cursor: pointer;
             width: 100%;
         }
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(253,184,19,0.3);
+        }
+        .form-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
         .back-link {
             display: inline-block;
             margin-bottom: 20px;
             color: #FDB813;
             text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
         }
         .message {
             padding: 15px;
@@ -197,15 +208,34 @@
             submitBtn.disabled = true;
             messageDiv.style.display = 'none';
             
-            // First save to peace_tokens (required fields)
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const city = document.getElementById('city').value;
+            const country = document.getElementById('country').value;
+            const word = document.getElementById('word').value;
+            const message = document.getElementById('message').value;
+            const openDate = document.getElementById('openDate').value;
+            const openCondition = document.getElementById('openCondition').value;
+            
+            // Data for peace_tokens (uses full_name)
             const peaceData = {
                 type: 'capsule',
-                full_name: document.getElementById('name').value,
-                city: document.getElementById('city').value,
-                country: document.getElementById('country').value,
-                email: document.getElementById('email').value,
-                word: document.getElementById('word').value,
+                full_name: name,
+                city: city,
+                country: country,
+                email: email,
+                word: word,
                 privacy: 'private'
+            };
+
+            // Data for time_capsules (uses name)
+            const capsuleData = {
+                name: name,
+                email: email,
+                message: message,
+                open_date: openDate,
+                open_condition: openCondition
             };
 
             try {
@@ -219,7 +249,20 @@
                 const result1 = await response1.json();
                 
                 if (!result1.success) {
-                    throw new Error(result1.error);
+                    throw new Error('Peace token error: ' + result1.error);
+                }
+                
+                // Save to time_capsules second
+                const response2 = await fetch('https://peaceforyou.bookforpeace.workers.dev', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(capsuleData)
+                });
+                
+                const result2 = await response2.json();
+                
+                if (!result2.success) {
+                    throw new Error('Capsule error: ' + result2.error);
                 }
                 
                 messageDiv.className = 'message success';
