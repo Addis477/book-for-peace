@@ -59,19 +59,41 @@
             border-radius: 15px;
             padding: 1.5rem;
         }
+        .light-card-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
         .light-name {
             color: #FDB813;
             font-weight: 600;
         }
         .light-country {
             color: rgba(255,255,255,0.6);
-            float: right;
         }
         .light-word {
             font-size: 1.5rem;
             margin: 15px 0;
             color: white;
             font-style: italic;
+        }
+        .light-type {
+            display: inline-block;
+            background: rgba(253,184,19,0.2);
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: #FDB813;
+        }
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #FDB813;
+        }
+        .error {
+            text-align: center;
+            padding: 50px;
+            color: #ff6b6b;
         }
     </style>
 </head>
@@ -99,33 +121,14 @@
 
     <section class="search-section">
         <div class="search-container">
-            <input type="text" class="search-input" placeholder="Search by name, word, or country...">
-            <button class="search-btn" onclick="alert('Search coming soon!')">Search</button>
+            <input type="text" class="search-input" id="searchInput" placeholder="Search by name, word, or country...">
+            <button class="search-btn" id="searchBtn">Search</button>
         </div>
     </section>
 
     <main class="lights-container">
-        <div class="lights-grid">
-            <div class="light-card">
-                <span class="light-name">Maria</span>
-                <span class="light-country">Ethiopia</span>
-                <div class="light-word">"Love"</div>
-            </div>
-            <div class="light-card">
-                <span class="light-name">John</span>
-                <span class="light-country">Kenya</span>
-                <div class="light-word">"Hope"</div>
-            </div>
-            <div class="light-card">
-                <span class="light-name">David & Sarah</span>
-                <span class="light-country">Ghana</span>
-                <div class="light-word">"Together"</div>
-            </div>
-            <div class="light-card">
-                <span class="light-name">Abebe Family</span>
-                <span class="light-country">Ethiopia</span>
-                <div class="light-word">"Unity"</div>
-            </div>
+        <div class="lights-grid" id="lightsGrid">
+            <div class="loading">Loading peaceful voices...</div>
         </div>
     </main>
 
@@ -151,8 +154,76 @@
 
     <script src="sky.js"></script>
     <script>
+        // AI Guide
         document.getElementById('aiGuide').onclick = () => alert('🕊️ AI Peace Guide\n\nHow can I help you?');
+
+        // Load peace tokens from database
+        async function loadPeaceTokens() {
+            const lightsGrid = document.getElementById('lightsGrid');
+            
+            try {
+                const response = await fetch('https://peaceforyou.bookforpeace.workers.dev');
+                const result = await response.json();
+                
+                if (result.success && result.data.length > 0) {
+                    lightsGrid.innerHTML = '';
+                    
+                    result.data.forEach(token => {
+                        // Format name based on type
+                        let displayName = '';
+                        if (token.type === 'personal') {
+                            displayName = token.full_name;
+                        } else if (token.type === 'couple') {
+                            displayName = `${token.person1_name} & ${token.person2_name}`;
+                        } else if (token.type === 'family') {
+                            displayName = token.family_name;
+                        } else if (token.type === 'group') {
+                            displayName = token.group_name;
+                        } else {
+                            displayName = 'Someone';
+                        }
+                        
+                        const card = document.createElement('div');
+                        card.className = 'light-card';
+                        card.innerHTML = `
+                            <div class="light-card-header">
+                                <span class="light-name">${displayName}</span>
+                                <span class="light-country">${token.country || 'Earth'}</span>
+                            </div>
+                            <div class="light-word">"${token.word}"</div>
+                            <div class="light-type">${token.type}</div>
+                        `;
+                        lightsGrid.appendChild(card);
+                    });
+                } else {
+                    lightsGrid.innerHTML = '<div class="light-card">No peace tokens yet. Be the first to share!</div>';
+                }
+            } catch (error) {
+                console.error('Error loading tokens:', error);
+                lightsGrid.innerHTML = '<div class="error">Unable to load peace tokens. Please try again later.</div>';
+            }
+        }
+
+        // Load tokens when page loads
+        loadPeaceTokens();
+
+        // Search functionality
+        document.getElementById('searchBtn').addEventListener('click', function() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.light-card');
+            
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Refresh every 30 seconds
+        setInterval(loadPeaceTokens, 30000);
     </script>
 </body>
-
 </html>
