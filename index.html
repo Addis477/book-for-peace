@@ -1,218 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peace for You Network</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* Additional styles for profile preview */
-        .profile-preview {
-            padding: 40px 0;
-            background: #0B1A2F;
-        }
+<!-- Ancient Voices Section -->
+<section class="ancient-voices" id="ancient-voices">
+    <div class="container">
+        <h2 class="section-title">🕯️ Ancient Voices</h2>
+        <p class="section-subtitle">Wisdom that echoes through time</p>
         
-        .profile-card {
-            background: linear-gradient(135deg, rgba(52,152,219,0.1), rgba(253,184,19,0.1));
-            border: 1px solid rgba(253,184,19,0.3);
-            border-radius: 20px;
-            padding: 30px;
-            display: flex;
-            align-items: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            justify-content: center;
-            text-align: center;
-        }
-        
-        .profile-icon {
-            font-size: 4rem;
-            background: rgba(253,184,19,0.2);
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid #FDB813;
-        }
-        
-        .profile-text {
-            flex: 1;
-            min-width: 250px;
-        }
-        
-        .profile-text h3 {
-            color: #FDB813;
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-        }
-        
-        .profile-text p {
-            color: rgba(255,255,255,0.8);
-            font-size: 1.1rem;
-        }
-        
-        .profile-btn {
-            background: #FDB813;
-            color: #0B1A2F;
-            padding: 12px 30px;
-            border-radius: 40px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-        
-        .profile-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(253,184,19,0.3);
-        }
-        
-        @media (max-width: 768px) {
-            .profile-card {
-                flex-direction: column;
-                gap: 20px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <span class="logo-text">🕊️ Peace for You Network</span>
+        <div class="voices-grid">
+            <!-- Nelson Mandela -->
+            <div class="voice-card">
+                <div class="voice-icon">🕊️</div>
+                <h3 class="voice-name">Nelson Mandela</h3>
+                <p class="voice-quote">"Peace is not just the absence of conflict, but the presence of justice."</p>
+                <span class="voice-country">South Africa</span>
             </div>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="active">HOME</a></li>
-                <li><a href="sky.html">SKY</a></li>
-                <li><a href="book.html">BOOK</a></li>
-                <li><a href="peace-map.html">PEACE MAP</a></li>
-                <li><a href="our-story.html">OUR STORY</a></li>
-                <li><a href="#" class="access-btn">🔑 GET ACCESS</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-sky" id="heroSky"></div>
-        <div class="hero-content">
-            <h1 class="hero-title">We do not wait for peace.<br><span class="gold-text">We make it.</span></h1>
-        </div>
-    </section>
-
-    <!-- Sky Preview -->
-    <section class="sky-preview">
-        <div class="container">
-            <div class="section-header">
-                <h2>☁️ The Sky Canvas</h2>
-                <a href="sky.html" class="view-all">View Full Sky →</a>
+            
+            <!-- Rumi -->
+            <div class="voice-card">
+                <div class="voice-icon">✨</div>
+                <h3 class="voice-name">Rumi</h3>
+                <p class="voice-quote">"The art of peace is not to wait for the storm to pass, but to dance in the rain."</p>
+                <span class="voice-country">Persia</span>
             </div>
-            <div class="sky-mini" id="skyMini"></div>
-        </div>
-    </section>
-
-    <!-- 5 Form Cards -->
-    <section class="cards-section">
-        <div class="container">
-            <h2 class="section-title">✨ Share Your Peace</h2>
-            <div class="cards-grid">
-                <!-- Row 1 (2 cards) -->
-                <div class="card-row row-1">
-                    <div class="card" onclick="window.location.href='personal-form.html'">
-                        <div class="card-icon">👤</div>
-                        <h3 class="card-title">PERSONAL</h3>
-                        <p class="card-desc">Share your peace word</p>
-                    </div>
-                    <div class="card" onclick="window.location.href='couple-form.html'">
-                        <div class="card-icon">💑</div>
-                        <h3 class="card-title">COUPLE</h3>
-                        <p class="card-desc">Share your love</p>
-                    </div>
-                </div>
-                
-                <!-- Row 2 (3 cards) -->
-                <div class="card-row row-2">
-                    <div class="card" onclick="window.location.href='family-form.html'">
-                        <div class="card-icon">👨‍👩‍👧‍👦</div>
-                        <h3 class="card-title">FAMILY</h3>
-                        <p class="card-desc">Share family peace</p>
-                    </div>
-                    <div class="card" onclick="window.location.href='group-form.html'">
-                        <div class="card-icon">👥</div>
-                        <h3 class="card-title">GROUP</h3>
-                        <p class="card-desc">Share group peace</p>
-                    </div>
-                    <div class="card" onclick="window.location.href='capsule-form.html'">
-                        <div class="card-icon">⭐</div>
-                        <h3 class="card-title">TIME CAPSULE</h3>
-                        <p class="card-desc">Seal a message for the future</p>
-                    </div>
-                </div>
+            
+            <!-- Albert Einstein -->
+            <div class="voice-card">
+                <div class="voice-icon">⚛️</div>
+                <h3 class="voice-name">Albert Einstein</h3>
+                <p class="voice-quote">"Peace cannot be kept by force. It can only be achieved by understanding."</p>
+                <span class="voice-country">Germany</span>
+            </div>
+            
+            <!-- Mother Teresa -->
+            <div class="voice-card">
+                <div class="voice-icon">❤️</div>
+                <h3 class="voice-name">Mother Teresa</h3>
+                <p class="voice-quote">"Peace begins with a smile."</p>
+                <span class="voice-country">Albania/India</span>
+            </div>
+            
+            <!-- Mahatma Gandhi -->
+            <div class="voice-card">
+                <div class="voice-icon">☮️</div>
+                <h3 class="voice-name">Mahatma Gandhi</h3>
+                <p class="voice-quote">"Be the change you wish to see in the world."</p>
+                <span class="voice-country">India</span>
+            </div>
+            
+            <!-- Wangari Maathai -->
+            <div class="voice-card">
+                <div class="voice-icon">🌳</div>
+                <h3 class="voice-name">Wangari Maathai</h3>
+                <p class="voice-quote">"Peace is directly linked to the protection of the environment."</p>
+                <span class="voice-country">Kenya</span>
             </div>
         </div>
-    </section>
-
-    <!-- NEW: Profile Preview Section -->
-    <section class="profile-preview">
-        <div class="container">
-            <div class="profile-card">
-                <div class="profile-icon">🏅</div>
-                <div class="profile-text">
-                    <h3>Your Peace Badges</h3>
-                    <p>See the badges you've earned for sharing peace. Every voice matters. Every word becomes light.</p>
-                </div>
-                <a href="profile.html" class="profile-btn">View My Badges →</a>
-            </div>
+        
+        <!-- Back to Top Button -->
+        <div class="back-to-top">
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="back-btn">
+                ↑ Back to Top
+            </button>
         </div>
-    </section>
-
-    <!-- Recent Lights -->
-    <section class="recent-lights">
-        <div class="container">
-            <div class="section-header">
-                <h2>📖 Recent Lights</h2>
-                <a href="book.html" class="view-all">View All →</a>
-            </div>
-            <div class="lights-grid" id="recentLights">
-                <!-- Will be populated by JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Floating Gift Icon -->
-    <div class="floating-gift" onclick="alert('🎁 Welcome wallpaper coming soon!')">
-        <div class="gift-icon">🎁</div>
     </div>
-
-    <!-- AI Peace Guide -->
-    <div class="ai-guide" id="aiGuide">
-        <div class="guide-icon">🕊️</div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">🕊️ Peace for You Network · © 2026</div>
-                <div class="footer-social">
-                    <span>FOLLOW US:</span>
-                    <a href="https://t.me/bookforpeace">📱 Telegram: @bookforpeace</a>
-                    <a href="https://tiktok.com/@peaceforyounetwork">🎵 TikTok: @peaceforyounetwork</a>
-                </div>
-                <div class="footer-links">
-                    <a href="privacy.html">Privacy Policy</a> | 
-                    <a href="terms.html">Terms of Use</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script src="sky.js"></script>
-    <script>
-        // AI Peace Guide
-        document.getElementById('aiGuide').onclick = () => alert('🕊️ Peace begins with you.');
-    </script>
-</body>
-</html>
+</section>
