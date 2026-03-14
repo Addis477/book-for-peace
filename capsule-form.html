@@ -14,6 +14,7 @@
         .form-title {
             font-size: 2.5rem;
             color: #FDB813;
+            margin-bottom: 1rem;
         }
         .form-container {
             max-width: 600px;
@@ -53,6 +54,15 @@
             font-weight: 600;
             cursor: pointer;
             width: 100%;
+            transition: all 0.3s;
+        }
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(253,184,19,0.3);
+        }
+        .form-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
         .back-link {
             display: inline-block;
@@ -197,69 +207,39 @@
             messageDiv.style.display = 'none';
             
             // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const city = document.getElementById('city').value;
-            const country = document.getElementById('country').value;
-            const word = document.getElementById('word').value;
-            const message = document.getElementById('message').value;
-            const openDate = document.getElementById('openDate').value;
-            const openCondition = document.getElementById('openCondition').value;
-            
-            // Data for peace_tokens (uses full_name)
-            const peaceData = {
+            const formData = {
                 type: 'capsule',
-                full_name: name,
-                city: city,
-                country: country,
-                email: email,
-                word: word,
-                privacy: 'private'
-            };
-
-            // Data for time_capsules (uses name)
-            const capsuleData = {
-                name: name,
-                email: email,
-                message: message,
-                open_date: openDate,
-                open_condition: openCondition
+                full_name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                city: document.getElementById('city').value,
+                country: document.getElementById('country').value,
+                word: document.getElementById('word').value,
+                message: document.getElementById('message').value,
+                open_date: document.getElementById('openDate').value,
+                open_condition: document.getElementById('openCondition').value
             };
 
             try {
-                // Save to peace_tokens first
-                const response1 = await fetch('https://peaceforyou.bookforpeace.workers.dev', {
+                // Send to Worker
+                const response = await fetch('https://peaceforyou.bookforpeace.workers.dev', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(peaceData)
+                    body: JSON.stringify(formData)
                 });
                 
-                const result1 = await response1.json();
+                const result = await response.json();
                 
-                if (!result1.success) {
-                    throw new Error('Peace token error: ' + result1.error);
+                if (result.success) {
+                    messageDiv.className = 'message success';
+                    messageDiv.textContent = '✅ Your time capsule has been sealed!';
+                    messageDiv.style.display = 'block';
+                    
+                    setTimeout(() => {
+                        window.location.href = 'profile.html';
+                    }, 2000);
+                } else {
+                    throw new Error(result.error);
                 }
-                
-                // Save to time_capsules second
-                const response2 = await fetch('https://peaceforyou.bookforpeace.workers.dev', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(capsuleData)
-                });
-                
-                const result2 = await response2.json();
-                
-                if (!result2.success) {
-                    throw new Error('Capsule error: ' + result2.error);
-                }
-                
-                messageDiv.className = 'message success';
-                messageDiv.textContent = '✅ Your time capsule has been sealed!';
-                messageDiv.style.display = 'block';
-                
-                setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 2000);
                 
             } catch (error) {
                 messageDiv.className = 'message error';
