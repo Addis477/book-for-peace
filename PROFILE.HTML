@@ -32,12 +32,70 @@
             border-radius: 15px;
             padding: 20px;
             text-align: center;
+            transition: all 0.3s;
+        }
+        .badge-card:hover {
+            transform: translateY(-5px);
+            border-color: #FDB813;
         }
         .badge-icon {
             font-size: 3rem;
             margin-bottom: 10px;
         }
         .badge-name {
+            color: #FDB813;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .badge-date {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+        .email-input {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid #FDB813;
+            border-radius: 40px;
+            color: white;
+            font-size: 1rem;
+            margin: 20px 0;
+        }
+        .load-btn {
+            background: #FDB813;
+            color: #0B1A2F;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+        }
+        .stats {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(253,184,19,0.1);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 40px 0;
+        }
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid rgba(253,184,19,0.1);
+        }
+        .stat-label {
+            color: white;
+        }
+        .stat-value {
+            color: #FDB813;
+            font-weight: bold;
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
             color: #FDB813;
         }
     </style>
@@ -62,19 +120,24 @@
 
     <header class="profile-header">
         <h1 class="profile-title">🏅 My Peace Badges</h1>
-        <p>Your earned badges will appear here</p>
+        <p>Enter your email to see your earned badges</p>
     </header>
 
     <main class="profile-container">
-        <div class="badges-grid">
-            <div class="badge-card">
-                <div class="badge-icon">🕊️✨</div>
-                <div class="badge-name">First Light</div>
+        <input type="email" class="email-input" id="emailInput" placeholder="your@email.com">
+        <button class="load-btn" onclick="loadBadges()">Load My Badges</button>
+
+        <div class="stats" id="stats" style="display:none;">
+            <h2 style="color:#FDB813; margin-bottom:20px;">Your Peace Stats</h2>
+            <div class="stat-item">
+                <span class="stat-label">Total Peace Tokens</span>
+                <span class="stat-value" id="totalTokens">0</span>
             </div>
-            <div class="badge-card">
-                <div class="badge-icon">🕊️💑🕊️</div>
-                <div class="badge-name">Couple Peace</div>
-            </div>
+        </div>
+
+        <h2 style="color:#FDB813; margin:40px 0 20px;">Earned Badges</h2>
+        <div class="badges-grid" id="badgesGrid">
+            <div class="loading">Enter your email and click Load</div>
         </div>
     </main>
 
@@ -101,6 +164,47 @@
     <script src="sky.js"></script>
     <script>
         document.getElementById('aiGuide').onclick = () => alert('🕊️ Peace begins with you.');
+
+        async function loadBadges() {
+            const email = document.getElementById('emailInput').value;
+            if (!email) {
+                alert('Please enter your email');
+                return;
+            }
+
+            document.getElementById('badgesGrid').innerHTML = '<div class="loading">Loading your badges...</div>';
+
+            try {
+                const response = await fetch(`https://peaceforyou.bookforpeace.workers.dev/badges/${encodeURIComponent(email)}`);
+                const result = await response.json();
+                
+                const grid = document.getElementById('badgesGrid');
+                const stats = document.getElementById('stats');
+                
+                if (result.success && result.data.length > 0) {
+                    grid.innerHTML = '';
+                    result.data.forEach(badge => {
+                        const card = document.createElement('div');
+                        card.className = 'badge-card';
+                        card.innerHTML = `
+                            <div class="badge-icon">${badge.badge_icon}</div>
+                            <div class="badge-name">${badge.badge_name}</div>
+                            <div class="badge-date">${new Date(badge.earned_at).toLocaleDateString()}</div>
+                        `;
+                        grid.appendChild(card);
+                    });
+                    
+                    stats.style.display = 'block';
+                    document.getElementById('totalTokens').textContent = result.data.length;
+                } else {
+                    grid.innerHTML = '<div style="text-align:center; padding:40px;">No badges earned yet. Share your peace to earn badges!</div>';
+                    stats.style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('badgesGrid').innerHTML = '<div style="text-align:center; padding:40px;">Error loading badges. Please try again.</div>';
+            }
+        }
     </script>
 </body>
 </html>
