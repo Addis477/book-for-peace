@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
@@ -18,11 +19,13 @@
                 <li><a href="book.html">BOOK</a></li>
                 <li><a href="peace-map.html">PEACE MAP</a></li>
                 <li><a href="our-story.html">OUR STORY</a></li>
+                <li><a href="profile.html">PROFILE</a></li>
                 <li><a href="#" class="access-btn">🔑 GET ACCESS</a></li>
             </ul>
         </div>
     </nav>
 
+    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-sky" id="heroSky"></div>
         <div class="hero-content">
@@ -30,6 +33,7 @@
         </div>
     </section>
 
+    <!-- Sky Preview -->
     <section class="sky-preview">
         <div class="container">
             <div class="section-header">
@@ -40,10 +44,12 @@
         </div>
     </section>
 
+    <!-- 5 Form Cards -->
     <section class="cards-section">
         <div class="container">
             <h2 class="section-title">✨ Share Your Peace</h2>
             <div class="cards-grid">
+                <!-- Row 1 (2 cards) -->
                 <div class="card-row row-1">
                     <div class="card" onclick="window.location.href='personal-form.html'">
                         <div class="card-icon">👤</div>
@@ -56,6 +62,8 @@
                         <p class="card-desc">Share your love</p>
                     </div>
                 </div>
+                
+                <!-- Row 2 (3 cards) -->
                 <div class="card-row row-2">
                     <div class="card" onclick="window.location.href='family-form.html'">
                         <div class="card-icon">👨‍👩‍👧‍👦</div>
@@ -70,31 +78,37 @@
                     <div class="card" onclick="window.location.href='capsule-form.html'">
                         <div class="card-icon">⭐</div>
                         <h3 class="card-title">TIME CAPSULE</h3>
-                        <p class="card-desc">Seal a message</p>
+                        <p class="card-desc">Seal a message for the future</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Recent Lights -->
     <section class="recent-lights">
         <div class="container">
             <div class="section-header">
                 <h2>📖 Recent Lights</h2>
                 <a href="book.html" class="view-all">View All →</a>
             </div>
-            <div class="lights-grid" id="recentLights"></div>
+            <div class="lights-grid" id="recentLights">
+                <!-- Will be populated by JavaScript -->
+            </div>
         </div>
     </section>
 
+    <!-- Floating Gift Icon -->
     <div class="floating-gift" onclick="alert('🎁 Welcome wallpaper coming soon!')">
         <div class="gift-icon">🎁</div>
     </div>
 
+    <!-- AI Peace Guide -->
     <div class="ai-guide" id="aiGuide">
         <div class="guide-icon">🕊️</div>
     </div>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -105,7 +119,7 @@
                     <a href="https://tiktok.com/@peaceforyounetwork">🎵 TikTok: @peaceforyounetwork</a>
                 </div>
                 <div class="footer-links">
-                    <a href="privacy.html">Privacy</a> | <a href="terms.html">Terms</a>
+                    <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a>
                 </div>
             </div>
         </div>
@@ -113,6 +127,7 @@
 
     <script src="sky.js"></script>
     <script>
+        // AI Peace Guide
         document.getElementById('aiGuide').onclick = () => alert('🕊️ Peace begins with you.');
     </script>
 </body>
