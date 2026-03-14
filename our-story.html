@@ -29,13 +29,15 @@
         .founder-image {
             width: 300px;
             height: 300px;
-            background: linear-gradient(135deg, #3498DB, #FDB813);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 150px;
+            overflow: hidden;
             box-shadow: 0 20px 40px rgba(253,184,19,0.3);
+            border: 3px solid #FDB813;
+        }
+        .founder-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         .founder-name {
             font-size: 2.5rem;
@@ -124,7 +126,9 @@
     </header>
 
     <div class="founder-section">
-        <div class="founder-image">👤</div>
+        <div class="founder-image">
+            <img src="founder.jpg" alt="Mr. Addis Abebayehu" onerror="this.src='https://via.placeholder.com/300x300?text=Founder'">
+        </div>
         <div class="founder-info">
             <h2 class="founder-name">Mr. Addis Abebayehu</h2>
             <div class="founder-title">FOUNDER · PEACE FOR YOU NETWORK</div>
