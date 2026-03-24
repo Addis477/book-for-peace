@@ -14,7 +14,6 @@
         .form-title {
             font-size: 2.5rem;
             color: #FDB813;
-            margin-bottom: 1rem;
         }
         .form-container {
             max-width: 600px;
@@ -50,24 +49,12 @@
             font-weight: 600;
             cursor: pointer;
             width: 100%;
-            transition: all 0.3s;
-        }
-        .form-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(253,184,19,0.3);
-        }
-        .form-submit:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
         }
         .back-link {
             display: inline-block;
             margin-bottom: 20px;
             color: #FDB813;
             text-decoration: none;
-        }
-        .back-link:hover {
-            text-decoration: underline;
         }
         .message {
             padding: 15px;
@@ -109,7 +96,6 @@
     <header class="form-header">
         <a href="index.html" class="back-link">← Back to Home</a>
         <h1 class="form-title">👥 Share Your Group Peace</h1>
-        <p style="color: rgba(255,255,255,0.8);">Your community's word becomes light.</p>
     </header>
 
     <main class="form-container">
@@ -118,15 +104,15 @@
         <form id="groupForm">
             <div class="form-group">
                 <label class="form-label">Group Name *</label>
-                <input type="text" class="form-input" id="groupName" required placeholder="e.g., Peace Builders">
+                <input type="text" class="form-input" id="groupName" required>
             </div>
             <div class="form-group">
                 <label class="form-label">Group Email *</label>
-                <input type="email" class="form-input" id="groupEmail" required placeholder="group@email.com">
+                <input type="email" class="form-input" id="groupEmail" required>
             </div>
             <div class="form-group">
                 <label class="form-label">City *</label>
-                <input type="text" class="form-input" id="city" required placeholder="Your city">
+                <input type="text" class="form-input" id="city" required>
             </div>
             <div class="form-group">
                 <label class="form-label">Country *</label>
@@ -134,17 +120,16 @@
                     <option value="">Select</option>
                     <option value="Ethiopia">Ethiopia</option>
                     <option value="Kenya">Kenya</option>
-                    <option value="Nigeria">Nigeria</option>
                     <option value="Other">Other</option>
                 </select>
             </div>
             <div class="form-group">
                 <label class="form-label">Members *</label>
-                <input type="text" class="form-input" id="members" required placeholder="e.g., 15 members">
+                <input type="text" class="form-input" id="members" required>
             </div>
             <div class="form-group">
                 <label class="form-label">Group Word *</label>
-                <input type="text" class="form-input" id="word" required placeholder="e.g., Unity, Action">
+                <input type="text" class="form-input" id="word" required>
             </div>
             <button type="submit" class="form-submit" id="submitBtn">✨ Share Your Peace</button>
         </form>
