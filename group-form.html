@@ -107,8 +107,8 @@
                 <input type="text" class="form-input" id="groupName" required>
             </div>
             <div class="form-group">
-                <label class="form-label">Group Email *</label>
-                <input type="email" class="form-input" id="groupEmail" required>
+                <label class="form-label">Email *</label>
+                <input type="email" class="form-input" id="email" required>
             </div>
             <div class="form-group">
                 <label class="form-label">City *</label>
@@ -173,7 +173,7 @@
             const formData = {
                 type: 'group',
                 group_name: document.getElementById('groupName').value,
-                group_email: document.getElementById('groupEmail').value,
+                email: document.getElementById('email').value,
                 city: document.getElementById('city').value,
                 country: document.getElementById('country').value,
                 members: document.getElementById('members').value,
