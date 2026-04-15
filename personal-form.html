@@ -33,7 +33,7 @@
             margin-bottom: 8px;
             font-weight: 500;
         }
-        .form-input, .form-select {
+        .form-input, .form-select, .form-textarea {
             width: 100%;
             padding: 12px 15px;
             background: rgba(255,255,255,0.1);
@@ -42,7 +42,11 @@
             color: white;
             font-size: 1rem;
         }
-        .form-input:focus, .form-select:focus {
+        .form-textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
             outline: none;
             border-color: #FDB813;
         }
@@ -112,6 +116,11 @@
             border: 1px solid #FF0000;
             color: #FF0000;
             display: block;
+        }
+        .char-hint {
+            color: rgba(255,255,255,0.4);
+            font-size: 0.85rem;
+            margin-top: 5px;
         }
     </style>
 </head>
@@ -192,6 +201,13 @@
                 <small style="color: rgba(255,255,255,0.4);">One word that represents peace to you</small>
             </div>
 
+            <!-- NEW: Long Message Field -->
+            <div class="form-group">
+                <label class="form-label">Your Peace Message *</label>
+                <textarea class="form-textarea" id="peaceMessage" required placeholder="Share your thoughts, story, or reflection on peace...&#10;&#10;You can write as much as you want. The first line will appear in the Book of Light."></textarea>
+                <div class="char-hint">✨ First line becomes your public phrase. Full message saved privately.</div>
+            </div>
+
             <div class="form-group">
                 <label class="form-label">Privacy *</label>
                 <div class="radio-group">
@@ -237,7 +253,18 @@
 
     <script src="sky.js"></script>
     <script>
-        // AI Peace Guide with Hugging Face
+        // Google Sheets Web App URL
+        const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwiSpGnPQBeFIlKsAoAXJsPyImZaCi335MJzwrEXA9erD9wJ-HJzPcxrqYqy-HDWUDecg/exec';
+        
+        // Helper: Extract first sentence from message
+        function extractShortPhrase(message) {
+            if (!message) return '';
+            const firstLine = message.split('\n')[0].trim();
+            const firstSentence = firstLine.split(/[.!?]/)[0].trim();
+            return firstSentence || firstLine.substring(0, 100);
+        }
+
+        // AI Peace Guide
         document.getElementById('aiGuide').onclick = async () => {
             const question = prompt('🕊️ Ask the Peace Guide (or press OK for a blessing):', 'give me peace');
             if (question === null) return;
@@ -246,14 +273,10 @@
                 const response = await fetch('https://peaceai.bookforpeace.workers.dev', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ 
-                        question: question,
-                        language: 'en'
-                    })
+                    body: JSON.stringify({ question: question, language: 'en' })
                 });
                 
                 const result = await response.json();
-                
                 if (result.success) {
                     alert('🕊️ Peace Guide says:\n\n"' + result.response + '"');
                 } else {
@@ -264,7 +287,7 @@
             }
         };
 
-        // Form submission with database
+        // Form submission
         document.getElementById('peaceForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -276,6 +299,9 @@
             submitBtn.disabled = true;
             messageDiv.style.display = 'none';
             
+            const fullMessage = document.getElementById('peaceMessage').value;
+            const shortPhrase = extractShortPhrase(fullMessage);
+            
             const formData = {
                 type: 'personal',
                 full_name: document.getElementById('fullName').value,
@@ -285,37 +311,58 @@
                 email: document.getElementById('email').value,
                 word: document.getElementById('word').value,
                 privacy: document.querySelector('input[name="privacy"]:checked').value,
-                email_consent: document.getElementById('emailConsent')?.checked || false
+                email_consent: document.getElementById('emailConsent')?.checked || false,
+                // New fields
+                fullMessage: fullMessage,
+                shortPhrase: shortPhrase
             };
 
             try {
-                const response = await fetch('https://peaceforyou.bookforpeace.workers.dev', {
+                // 1. Submit to your main worker
+                const workerResponse = await fetch('https://peaceforyou.bookforpeace.workers.dev', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)
                 });
                 
-                const result = await response.json();
+                const workerResult = await workerResponse.json();
                 
-                if (result.success) {
+                // 2. Also submit to Google Sheets (backup)
+                try {
+                    await fetch(SHEETS_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            type: formData.type,
+                            name: formData.full_name,
+                            email: formData.email,
+                            city: formData.city,
+                            country: formData.country,
+                            word: formData.word,
+                            fullMessage: fullMessage,
+                            shortPhrase: shortPhrase,
+                            id: workerResult.id || 'pending'
+                        })
+                    });
+                } catch (sheetsError) {
+                    console.log('Sheets backup failed, but worker succeeded');
+                }
+                
+                if (workerResult.success) {
                     messageDiv.className = 'message success';
-                    messageDiv.textContent = '✅ Your peace has been saved! Redirecting...';
+                    messageDiv.textContent = '✅ Your peace has been shared! Redirecting...';
                     messageDiv.style.display = 'block';
                     
                     setTimeout(() => {
                         window.location.href = 'book.html';
                     }, 2000);
                 } else {
-                    messageDiv.className = 'message error';
-                    messageDiv.textContent = '❌ Error: ' + result.error;
-                    messageDiv.style.display = 'block';
-                    
-                    submitBtn.textContent = originalText;
-                    submitBtn.disabled = false;
+                    throw new Error(workerResult.error || 'Unknown error');
                 }
+                
             } catch (error) {
                 messageDiv.className = 'message error';
-                messageDiv.textContent = '❌ Network error. Please try again.';
+                messageDiv.textContent = '❌ Error: ' + error.message;
                 messageDiv.style.display = 'block';
                 
                 submitBtn.textContent = originalText;
